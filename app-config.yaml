@@ -27,6 +27,9 @@ backend:
     credentials: true
   # This is for local development only, it is not recommended to use this in production
   # The production database configuration is stored in app-config.production.yaml
+  reading:
+    allow:
+      - host: 'demo.backstage.io'
   database:
     # config options: https://node-postgres.com/apis/client
     client: pg
@@ -82,6 +85,7 @@ auth:
   providers:
     github:
       development:
+        # the application: https://github.com/settings/applications/2409796
         clientId: ea7cac5e218eb7fa8b04
         clientSecret: 679b5ec3b54510b768d2b4d2c1ffe04ed1d827bb
 

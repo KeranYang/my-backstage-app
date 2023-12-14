@@ -12,8 +12,13 @@ apiVersion: backstage.io/v1alpha1
 kind: Component
 metadata:
   name: example-website
+  annotations:
+    # In order for Backstage to detect that an entity has Kubernetes components,
+    # the following annotation should be added
+    'backstage.io/kubernetes-id': example-website
+    'backstage.io/kubernetes-namespace': default
 spec:
-  type: website
+  type: service
   lifecycle: experimental
   owner: numaflow-developers
   system: examples

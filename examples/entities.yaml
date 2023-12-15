@@ -15,7 +15,7 @@ metadata:
   annotations:
     # In order for Backstage to detect that an entity has Kubernetes components,
     # the following annotation should be added
-    'backstage.io/kubernetes-id': example-website
+    'backstage.io/kubernetes-id': go-hello-world
     'backstage.io/kubernetes-namespace': default
 spec:
   type: service

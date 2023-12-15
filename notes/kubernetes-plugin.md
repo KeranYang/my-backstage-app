@@ -107,3 +107,6 @@ spec:
   system: examples
   providesApis: [example-grpc-api]
 ```
+
+## Step four: view the kubernetes object in the entity page
+![cluster-display](screenshots/cluster-display.png)

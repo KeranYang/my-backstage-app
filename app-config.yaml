@@ -121,29 +121,6 @@ catalog:
     #   rules:
     #     - allow: [User, Group]
 
-# Steps to create kubernetes configurations to enable kubernetes plugin
-# 1. Create a service account named `backstage-sa` in the `default` namespace
-# kubectl create serviceaccount backstage-sa -n default
-# 2. Create a cluster role binding for the service account, give it `cluster-admin` role
-# kubectl create clusterrolebinding backstage-sa-binding --clusterrole=cluster-admin --serviceaccount=default:backstage-sa
-
-# 3. Create a secret for the service account
-#kubectl apply -f - <<EOF
-#apiVersion: v1
-#kind: Secret
-#metadata:
-#  name: backstage-sa-secret
-#  namespace: default
-#  annotations:
-#    kubernetes.io/service-account.name: backstage-sa
-#type: kubernetes.io/service-account-token
-#EOF
-
-# > secret/backstage-sa-secret created
-
-# 4. Retrieve the token for the service account
-# kubectl get secret backstage-sa-secret -n default -o jsonpath="{.data.token}" | base64 --decode
-
 kubernetes:
   serviceLocatorMethod:
     type: 'multiTenant'
@@ -151,8 +128,8 @@ kubernetes:
     - type: 'config'
       clusters:
         - name: 'local-kind'
-          url: 'https://127.0.0.1:49872'  # URL to my kind cluster API, got it by running `kubectl cluster-info`
+          url: 'https://127.0.0.1:49872'
           authProvider: 'serviceAccount'
           skipMetricsLookup: true
           skipTLSVerify: true
-          serviceAccountToken: 'eyJhbGciOiJSUzI1NiIsImtpZCI6Il9uTV9QTU9rM29ETVJmaGducVA0S2I5MVhnWXp3d1k3TGdrTlhrdDgwd0EifQ.eyJpc3MiOiJrdWJlcm5ldGVzL3NlcnZpY2VhY2NvdW50Iiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9uYW1lc3BhY2UiOiJkZWZhdWx0Iiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9zZWNyZXQubmFtZSI6ImJhY2tzdGFnZS1zYS1zZWNyZXQiLCJrdWJlcm5ldGVzLmlvL3NlcnZpY2VhY2NvdW50L3NlcnZpY2UtYWNjb3VudC5uYW1lIjoiYmFja3N0YWdlLXNhIiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9zZXJ2aWNlLWFjY291bnQudWlkIjoiMjE4ZDVmZjAtNThhZi00OGI5LWJhZmEtMGE4MTFjNzJlZDkwIiwic3ViIjoic3lzdGVtOnNlcnZpY2VhY2NvdW50OmRlZmF1bHQ6YmFja3N0YWdlLXNhIn0.ZEmDFX4xlz2lSn0YHxTZY9GOGA1skOqG9vg9fJNKoQXAsCXBnrk61tYmRcttaGsZv5jwt5tpeEvZhtqNOzJz82hNBFJYBsDl1A9bqBEzZEZiDg2MW4N06Z94rBGnaCpnlICAaFU-bXnzVXYn0QIwWv896mUuKWUOwJpYDCqP336Myr2ca-6JvjVT_Si-BsQpefKKah39_KOwqaO-dqEz9freY00dOR4xVAQC5AXlFxlGItZSqXSjHrw1fBZL2EyLaURkXYCNzyb0dGQNwcB9Jk7wuu6Fm5uoW1MkbWTjBQX1L6kJ3Yd75yQIisHF9R574cCBLaAI3A0wCmERd56NUg'  # Token for authentication
+          serviceAccountToken: 'eyJhbGciOiJSUzI1NiIsImtpZCI6Il9uTV9QTU9rM29ETVJmaGducVA0S2I5MVhnWXp3d1k3TGdrTlhrdDgwd0EifQ.eyJpc3MiOiJrdWJlcm5ldGVzL3NlcnZpY2VhY2NvdW50Iiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9uYW1lc3BhY2UiOiJkZWZhdWx0Iiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9zZWNyZXQubmFtZSI6ImJhY2tzdGFnZS1zYS1zZWNyZXQiLCJrdWJlcm5ldGVzLmlvL3NlcnZpY2VhY2NvdW50L3NlcnZpY2UtYWNjb3VudC5uYW1lIjoiYmFja3N0YWdlLXNhIiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9zZXJ2aWNlLWFjY291bnQudWlkIjoiMjE4ZDVmZjAtNThhZi00OGI5LWJhZmEtMGE4MTFjNzJlZDkwIiwic3ViIjoic3lzdGVtOnNlcnZpY2VhY2NvdW50OmRlZmF1bHQ6YmFja3N0YWdlLXNhIn0.ZEmDFX4xlz2lSn0YHxTZY9GOGA1skOqG9vg9fJNKoQXAsCXBnrk61tYmRcttaGsZv5jwt5tpeEvZhtqNOzJz82hNBFJYBsDl1A9bqBEzZEZiDg2MW4N06Z94rBGnaCpnlICAaFU-bXnzVXYn0QIwWv896mUuKWUOwJpYDCqP336Myr2ca-6JvjVT_Si-BsQpefKKah39_KOwqaO-dqEz9freY00dOR4xVAQC5AXlFxlGItZSqXSjHrw1fBZL2EyLaURkXYCNzyb0dGQNwcB9Jk7wuu6Fm5uoW1MkbWTjBQX1L6kJ3Yd75yQIisHF9R574cCBLaAI3A0wCmERd56NUg'

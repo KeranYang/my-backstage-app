@@ -1,26 +1,22 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: go-hello-world
+  name: go-hello-world-deployment
   labels:
-    app: go-hello-world
+    app: go-hello-world-app
     backstage.io/kubernetes-id: go-hello-world
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: go-hello-world
+      app: go-hello-world-app
   template:
     metadata:
       labels:
-        app: go-hello-world
+        app: go-hello-world-app
         backstage.io/kubernetes-id: go-hello-world
     spec:
       containers:
         - name: go-hello-world
           image: quay.io/keranyang/go-hello-world:v1.0.1
           imagePullPolicy: Always
-
-
-# TO DEBUG K8S
-# curl --location --request POST 'http://localhost:7007/api/kubernetes/services/example-website' --header 'Content-Type: application/json' --data-raw '{"entity":{"metadata":{"name":"example-website"}}}'

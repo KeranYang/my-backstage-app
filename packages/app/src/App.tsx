@@ -36,6 +36,7 @@ import { catalogEntityCreatePermission } from '@backstage/plugin-catalog-common/
 
 import { githubAuthApiRef } from '@backstage/core-plugin-api';
 import { SignInPage } from '@backstage/core-components';
+import { IksmPage } from '@internal/plugin-iksm';
 
 const app = createApp({
   apis,
@@ -110,6 +111,7 @@ const routes = (
     </Route>
     <Route path="/settings" element={<UserSettingsPage />} />
     <Route path="/catalog-graph" element={<CatalogGraphPage />} />
+    <Route path="/iksm" element={<IksmPage />} />
   </FlatRoutes>
 );
 

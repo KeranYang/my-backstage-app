@@ -56,6 +56,7 @@ import {
 } from '@backstage/catalog-model';
 
 import { EntityKubernetesContent } from '@backstage/plugin-kubernetes';
+import { IksmPage } from "@internal/plugin-iksm/src/plugin";
 
 import { TechDocsAddons } from '@backstage/plugin-techdocs-react';
 import { ReportIssue } from '@backstage/plugin-techdocs-module-addons-contrib';
@@ -180,6 +181,10 @@ const serviceEntityPage = (
 
     <EntityLayout.Route path="/kubernetes" title="Kubernetes">
         <EntityKubernetesContent refreshIntervalMs={30000} />
+    </EntityLayout.Route>
+
+    <EntityLayout.Route path="/iksm" title="IKSM">
+        <IksmPage/>
     </EntityLayout.Route>
   </EntityLayout>
 );

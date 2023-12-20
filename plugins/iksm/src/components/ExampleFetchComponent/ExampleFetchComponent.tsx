@@ -2,7 +2,9 @@ import React from 'react';
 import { Table, TableColumn, Progress, ResponseErrorPanel } from '@backstage/core-components';
 import useAsync from 'react-use/lib/useAsync';
 import axios from "axios";
+import {useEntity} from "@backstage/plugin-catalog-react";
 
+/*
 export const exampleResources = {
   "results": [
     {
@@ -12,6 +14,7 @@ export const exampleResources = {
     },
   ]
 }
+ */
 
 type Resource = {
   assetId: string; // "numaflow-assets-1"
@@ -50,7 +53,8 @@ export const DenseTable = ({ resources }: DenseTableProps) => {
 };
 
 export const ExampleFetchComponent = () => {
-
+  const entity = useEntity();
+  const assetId = entity.entity.metadata.name;
   const { value, loading, error } = useAsync(async (): Promise<Resource[]> => {
     /*
     console.log(exampleResources.results)
@@ -63,7 +67,7 @@ export const ExampleFetchComponent = () => {
     // for now, let's just hardcode the assetId,
     // in the future, we'll want to pass this in from the application that uses this plugin
     try {
-      const response = await axios.get(`http://localhost:7373/getResources/numaflow-asset-1`);
+      const response = await axios.get(`http://localhost:7373/getResources/${assetId}`);
         return [response.data];
     } catch (e) {
         throw e;

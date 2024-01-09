@@ -30,6 +30,7 @@ backend:
   reading:
     allow:
       - host: 'demo.backstage.io'
+      - host: 'localhost:7373'
   database:
     # config options: https://node-postgres.com/apis/client
     client: pg

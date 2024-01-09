@@ -56,16 +56,6 @@ export const ExampleFetchComponent = () => {
   const entity = useEntity();
   const assetId = entity.entity.metadata.name;
   const { value, loading, error } = useAsync(async (): Promise<Resource[]> => {
-    /*
-    console.log(exampleResources.results)
-    console.log("--------------------")
-    const response = await axios.get(`http://localhost:7373/getResources/1`);
-    console.log([response.data])
-    return exampleResources.results;
-    */
-
-    // for now, let's just hardcode the assetId,
-    // in the future, we'll want to pass this in from the application that uses this plugin
     try {
       const response = await axios.get(`http://localhost:7373/getResources/${assetId}`);
         return [response.data];

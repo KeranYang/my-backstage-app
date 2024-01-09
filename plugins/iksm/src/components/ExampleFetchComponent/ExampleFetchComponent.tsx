@@ -4,18 +4,6 @@ import useAsync from 'react-use/lib/useAsync';
 import axios from "axios";
 import {useEntity} from "@backstage/plugin-catalog-react";
 
-/*
-export const exampleResources = {
-  "results": [
-    {
-      "assetId": "numaflow-assets-1",
-      "namespaceName": "default",
-      "clusterName": "cluster-1",
-    },
-  ]
-}
- */
-
 type Resource = {
   assetId: string; // "numaflow-assets-1"
   namespaceName: string; // "default"

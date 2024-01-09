@@ -1,5 +1,5 @@
 import { UrlReader } from '@backstage/backend-common';
-import {ANNOTATION_LOCATION, ANNOTATION_ORIGIN_LOCATION, Entity} from '@backstage/catalog-model';
+import {Entity} from '@backstage/catalog-model';
 import {
     EntityProvider,
     EntityProviderConnection,
@@ -7,6 +7,10 @@ import {
 
 /**
  * Provides entities from iksm service.
+ * The provider sends request an iksm service hosted locally at port 7373 and gets
+ * response back.
+ * The response includes information about asset numaflow-assets-1.
+ * The provider creates the namespace entity and builds the dependency relationship between the asset and the namespace.
  */
 export class KubernetesResourcesProvider implements EntityProvider {
     private readonly env: string;
@@ -39,10 +43,7 @@ export class KubernetesResourcesProvider implements EntityProvider {
             `http://localhost:7373/getResources/numaflow-assets-1`,
         );
 
-        console.log("response")
-        console.log((await response.buffer()).toString())
         const data = JSON.parse((await response.buffer()).toString());
-        console.log(data.namespaceName)
 
         /** [5] */
         const entities: Entity[] = this.iksmResourcesToEntities(data.namespaceName);
